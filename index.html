@@ -1,135 +1,146 @@
-<!DOCTYPE>
-<html lang="es">
- 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="description" content="Aqui va a ir la descripcion de tu sitio web">
-		<meta name="keywords" content="Aqui, palabras, claves">
-		<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
-		<title>Maquetacion Web</title>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="js/slides.min.jquery.js"></script>
- 
-		<script>
-            $(function(){
-                $("#slideshow").slides();
-            });
-        </script>
- 
-	</head
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-step Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            width: 600px;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-section h3 {
+            margin-bottom: 10px;
+        }
+        .form-section .form-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .form-navigation button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-navigation button:disabled {
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
 
-	<body>
+<div class="form-container">
+    <form id="multi-step-form">
+        <!-- Step 1 -->
+        <div class="form-step active">
+            <div class="form-section">
+                <h3>Información Cliente</h3>
+                <div class="form-group">
+                    <label for="field1">Nombre:</label>
+                    <label for="field2">Apellido:</label>
+                    <label for="field3">Edad:</label>
+                    <input type="text" id="field1" name="field1">
+                    <input type="text" id="field2" name="field2">
+                    <input type="number" id="field3" name="field3">
+                </div>
+            </div>
 
-		<header>
-			<div id="subheader">
-				<div id="logotipo"><p><a href="">Os Touch</a></p></div>
-				<nav>
-					<ul>
-						<li><a href="#">Inicio</a></li>
-						<li><a href="#">Blog</a></li>
-						<li><a href="#">Contacto</a></li>
-					</ul>
-				</nav>
-			</div>
-		</header>
+            <div class="form-section">
+                <h3>Documentos</h3>
+                <div class="form-group">
+                    <label for="field4">Pasaporte:</label>
+                    <label for="field5">Identificación:</label>
+                    <label for="field6">Licencia de Conducir:</label>
+                    <input type="text" id="field4" name="field4">
+                    <input type="text" id="field5" name="field5">
+                    <input type="text" id="field6" name="field6">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="form-step">
+            <div class="form-section">
+                <h3>Contacto</h3>
+                <div class="form-group">
+                    <label for="field7">Teléfono:</label>
+                    <label for="field8">Correo Electrónico:</label>
+                    <label for="field9">Dirección:</label>
+                    <input type="text" id="field7" name="field7">
+                    <input type="email" id="field8" name="field8">
+                    <input type="text" id="field9" name="field9">
+                </div>
+            </div>
 
-		<section id="wrap">
+            <div class="form-section">
+                <h3>Otros</h3>
+                <div class="form-group">
+                    <label for="field10">Comentario:</label>
+                    <label for="field11">Referencias:</label>
+                    <label for="field12">Notas Adicionales:</label>
+                    <input type="text" id="field10" name="field10">
+                    <input type="text" id="field11" name="field11">
+                    <input type="text" id="field12" name="field12">
+                </div>
+            </div>
+        </div>
 
-			<section id="main">
+        <!-- Navigation buttons -->
+        <div class="form-navigation">
+            <button type="button" id="prevBtn" onclick="changeStep(-1)" disabled>Anterior</button>
+            <button type="button" id="nextBtn" onclick="changeStep(1)">Siguiente</button>
+        </div>
+    </form>
+</div>
 
-				<section id="slideshow">
-					<div class="slides_container">
-						<div><a href="#"><img src="imagenes/slideshow/bridge.jpg"/></a></div>
-						<div><a href="#"><img src="imagenes/slideshow/shelter.jpg"/></a></div>
-					</div>
-				</section>
+<script>
+    let currentStep = 0;
 
-				<section id="bienvenidos">
-					<article>
-						<hgroup><h3>Bienvenido a nuestro sitio web</h3></hgroup>
-						<p>
-							<ul>
-							  <li>+ Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							  <li>+ Nullam pellentesque velit a erat eleifend in mollis turpis posuere.</li>
-							  <li>+ Sed a elit at magna posuere ultricies id sed elit.</li>
-							  <li>+ Curabitur interdum purus a libero semper at molestie felis dictum.</li>
-							  <li>+ Fusce malesuada nibh sit amet nibh consequat vitae sagittis sapien porttitor.</li>
-							</ul>
-						</p>
-					</article>
-				</section>
+    function changeStep(step) {
+        const steps = document.querySelectorAll('.form-step');
+        steps[currentStep].classList.remove('active');
+        currentStep += step;
+        steps[currentStep].classList.add('active');
+        document.getElementById('prevBtn').disabled = currentStep === 0;
+        document.getElementById('nextBtn').textContent = currentStep === steps.length - 1 ? 'Enviar' : 'Siguiente';
 
-				<section id="contenido">
-					<article>
-						<hgroup><h2 class="titulo">Titulo del articulo</h2></hgroup>
-						<p class="fecha">5 de Agosto de 2015</p>
-						<img class="thumb" src="imagenes/thumb1.jpg" alt="Thumbail #1"/>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</article>
+        if (currentStep === steps.length - 1) {
+            document.getElementById('nextBtn').type = 'submit';
+        } else {
+            document.getElementById('nextBtn').type = 'button';
+        }
+    }
+</script>
 
-					<article>
-						<hgroup><h2 class="titulo">Titulo del articulo</h2></hgroup>
-						<p class="fecha">5 de Agosto de 2015</p>
-						<img class="thumb" src="imagenes/thumb2.jpg" alt="Thumbail #2"/>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</article>
-				</section>
-
-				<aside>
-					<section class="widget">
-						<h3>Articulos Recientes</h3>
-						<ul>
-							<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
-							<li><a href="#">Nullam pellentesque velit.</a></li>
-							<li><a href="#">Sed a elit at magna.</a></li>
-							<li><a href="#">Curabitur interdum.</a></li>
-							<li><a href="#">Fusce malesuada.</a></li>
-						</ul>
-					</section>
-
-					<section class="widget">
-						<h3>Articulos Recientes</h3>
-						<img src="imagenes/publicidad.png"/>
-					</section>
-				</aside>
-
-			</section>
-
-			<footer>
-				<section id="acerca-de">
-					<article>
-						<hgroup><h3>Acerca de ...</h3></hgroup>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</article>
-				</section>
-
-				<section id="redes-s">
-					<div class="email"><a href="#"></a></div>
-					<div class="twitter"><a href="#"></a></div>
-					<div class="youtube"><a href="#"></a></div>
-					<div class="facebook"><a href="#"></a></div>
-				</section>
-
-			</footer>
-
-			<div id="copyright"><p>.</p></div>
-
-		</section>
-
-	</body>
+</body>
 </html>
